@@ -1,0 +1,35 @@
+// QuestBoard off-chain metadata indexer.
+//
+// The contract stores only a short `metadata` pointer (this record's id) and the
+// authoritative escrow state. Human-readable text (titles, descriptions,
+// acceptance criteria) lives here, keyed back to the on-chain quest id.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model QuestMeta {
+  /// Record id; this value is what the contract's `metadata` pointer holds.
+  id                 String   @id @default(cuid())
+  /// On-chain quest id, linked after the post transaction confirms.
+  questId            Int?     @unique
+  title              String
+  description        String
+  acceptanceCriteria String
+  /// Comma-separated tags (e.g. "rust,frontend,good-first-issue").
+  tags               String   @default("")
+  /// Reward amount in the token's smallest unit, stored as a string (i128-safe).
+  reward             String
+  tokenSymbol        String   @default("XLM")
+  /// Unix-seconds deadline; 0 = none.
+  deadline           Int      @default(0)
+  /// Deliverable pointer submitted by the worker (mirrors on-chain submission).
+  deliverableUrl     String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

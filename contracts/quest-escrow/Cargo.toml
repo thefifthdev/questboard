@@ -1,0 +1,17 @@
+[package]
+name = "quest-escrow"
+version = "0.1.0"
+edition = "2021"
+publish = false
+license = "MIT"
+description = "On-chain bounty escrow for QuestBoard — post, claim, submit, and release rewards trustlessly on Soroban."
+
+[lib]
+crate-type = ["lib", "cdylib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }

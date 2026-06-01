@@ -1,0 +1,7 @@
+packages:
+  - "web"
+  - "server"
+  - "packages/*"
+# Note: contracts/ is a Rust/Soroban workspace managed by cargo (not pnpm).
+# packages/quest-client holds the typed TypeScript bindings generated from the
+# deployed quest-escrow contract, consumed by both web/ and server/.

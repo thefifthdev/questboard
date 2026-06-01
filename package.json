@@ -1,0 +1,28 @@
+{
+  "name": "questboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "On-chain bounty board for the Stellar ecosystem — post tasks, earn rewards, build reputation trustlessly on Soroban.",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:client": "pnpm --filter @questboard/quest-client build",
+    "dev:web": "pnpm --filter @questboard/web dev",
+    "dev:server": "pnpm --filter @questboard/server dev",
+    "build": "pnpm --filter @questboard/quest-client build && pnpm --filter @questboard/server build && pnpm --filter @questboard/web build",
+    "lint": "pnpm -r --if-present lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "test": "pnpm -r --if-present test",
+    "contract:build": "cd contracts && stellar contract build",
+    "contract:test": "cargo test --manifest-path Cargo.toml",
+    "contract:fmt": "cargo fmt --check",
+    "contract:clippy": "cargo clippy --all-targets -- -D warnings"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  }
+}
